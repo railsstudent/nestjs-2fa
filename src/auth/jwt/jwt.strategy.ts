@@ -6,7 +6,7 @@ import { jwtConstants } from '../constants';
 import { LoginDto, User } from '../types';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'jwt-tfa') {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(private readonly service: UserService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

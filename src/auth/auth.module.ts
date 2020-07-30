@@ -10,7 +10,7 @@ import { TfaService, UserService } from './services';
 @Module({
   imports: [
     SharedModule,
-    PassportModule.register({ defaultStrategy: 'jwt-tfa' }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {  

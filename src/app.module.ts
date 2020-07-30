@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { SharedModule } from './shared';
-import { JwtAuthGuard } from './auth/jwt';
+import { AuthModule, JwtAuthGuard } from './auth';
 
 @Module({
   imports: [AuthModule, SharedModule],
