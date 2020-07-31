@@ -1,3 +1,4 @@
+import { Encoding } from "speakeasy";
 
 export interface User {
     id: number;
@@ -10,4 +11,17 @@ export interface LoginDto {
     password: string;
     secret: string;
     token: string;
+}
+
+
+export interface OtpUrlOptions { 
+    secret: string; 
+    issuer: string; 
+    label?: string;
+    encoding: Encoding;
+}
+
+export interface CustomQRCodeDto { 
+    secret: string; 
+    label?: string;
 }

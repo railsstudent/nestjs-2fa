@@ -1,9 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
 import * as speakeasy from 'speakeasy';
 import * as qrCode from 'qrcode';
 import { Response } from 'express';
 import { encoding } from '../constants';
-import { LoginDto } from '../types';
+import { LoginDto, OtpUrlOptions } from '../types';
 import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 
@@ -27,6 +27,30 @@ export class TfaService {
 
     generateQRCode(data: string, res: Response) {
         qrCode.toFileStream(res, data)
+    }
+
+    generateQRCodeFromSecret(options: OtpUrlOptions, res: Response) {
+        if (!options) {
+            throw new BadRequestException('options does not exist');
+        }
+
+        const { secret, issuer, label = 'Unknown', encoding = 'base32' } = options;
+        if (!secret) {
+            throw new BadRequestException('secret is missing');
+        }
+
+        if (!issuer) {
+            throw new BadRequestException('issuer is missing');
+        }
+
+        const data =  speakeasy.otpauthURL({
+            secret,
+            issuer,
+            label,
+            encoding,
+        })
+
+        qrCode.toFileStream(res, data);
     }
 
     totpVerify(secret: string, token: string) {

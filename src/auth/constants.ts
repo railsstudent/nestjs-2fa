@@ -3,3 +3,5 @@ export const jwtConstants = {
 }
 
 export const encoding = 'base32';
+
+export const Issuer = 'ABC Company';
