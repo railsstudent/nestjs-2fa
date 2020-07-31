@@ -1,5 +1,6 @@
 export const jwtConstants = {
-    secret: 'jwtScret'
+    secret: 'jwtScret',
+    algorithm: 'HS512'
 }
 
 export const encoding = 'base32';
